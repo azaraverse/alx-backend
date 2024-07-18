@@ -54,16 +54,16 @@ class Server:
         idx_range = index_range(page=page, page_size=page_size)
 
         # retrieve the data from the baby names csv file
-        self.dataset()
+        dataset = self.dataset()
 
         # if input args are out of range for the dataset, return an
         # empty list
         # if the first index arg is greater than len of dataset,
-        if idx_range[0] >= len(self.__dataset):
+        if idx_range[0] >= len(dataset):
             return []
 
         # append each line in generated valid index to a list
         paginated = []
         for line in range(idx_range[0], idx_range[1]):
-            paginated.append(self.__dataset[line])
+            paginated.append(dataset[line])
         return paginated

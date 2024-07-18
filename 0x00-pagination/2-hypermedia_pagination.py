@@ -54,16 +54,16 @@ class Server:
         idx_range = index_range(page=page, page_size=page_size)
 
         # retrieve the data from the baby names csv file
-        self.dataset()
+        dataset = self.dataset()
 
         # if the first index arg is greater than len of dataset,
-        if idx_range[0] >= len(self.__dataset):
+        if idx_range[0] >= len(dataset):
             return []
 
         # append each line in generated valid index to a list
         paginated = []
         for line in range(idx_range[0], idx_range[1]):
-            paginated.append(self.__dataset[line])
+            paginated.append(dataset[line])
         return paginated
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
@@ -71,8 +71,8 @@ class Server:
         A method that takes sames args and defaults as get_page method and
         returns metadata of a page in dict form
         """
-        self.dataset()
-        total_pages = math.ceil(len(self.__dataset) / page_size)
+        dataset = self.dataset()
+        total_pages = math.ceil(len(dataset) / page_size)
         data = self.get_page(page=page, page_size=page_size)
 
         if page < total_pages:

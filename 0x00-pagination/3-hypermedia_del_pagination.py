@@ -39,7 +39,9 @@ class Server:
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+    def get_hyper_index(
+            self, index: int = None, page_size: int = 10  # type: ignore
+    ) -> Dict:  # nopep8
         """
         A method that ensures pagination is consistent in the event
         deletion or addition of data occurs.
@@ -47,7 +49,7 @@ class Server:
         Handles deletion in a deletion-resilient manner
         """
         indexed_datasest = self.indexed_dataset()
-        assert index <= len(self.__indexed_dataset)
+        assert index <= len(indexed_datasest)
 
         current_idx = index
 
