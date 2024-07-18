@@ -48,14 +48,14 @@ class Server:
 
         Handles deletion in a deletion-resilient manner
         """
-        indexed_datasest = self.indexed_dataset()
-        assert index <= len(indexed_datasest)
+        indexed_dataset = self.indexed_dataset()
+        assert index <= len(indexed_dataset)
 
         current_idx = index
 
         data = []
-        while len(data) < page_size and current_idx < len(indexed_datasest):  # nopep8
-            item = indexed_datasest.get(current_idx)
+        while len(data) < page_size and current_idx < len(indexed_dataset):  # nopep8
+            item = indexed_dataset.get(current_idx)
             if item:
                 data.append(item)
             current_idx += 1
