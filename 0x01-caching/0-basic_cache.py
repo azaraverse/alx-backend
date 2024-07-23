@@ -41,4 +41,7 @@ class BasicCache(BaseCaching):
     """ A caching system that inherits from BaseCaching
     """
     def __init__(self):
+        """ Initialise the class and call the cooperative superclass
+            method.
+        """
         super().__init__()
