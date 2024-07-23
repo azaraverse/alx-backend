@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 class LRUCache(BaseCaching):
-    """ FIFOCaching system that inherits from BaseCaching
+    """ LRUCaching system that inherits from BaseCaching
     """
     def __init__(self):
         """ Initialise the class and call the cooperative superclass

@@ -4,7 +4,7 @@ from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """ FIFOCaching system that inherits from BaseCaching
+    """ LIFOCaching system that inherits from BaseCaching
     """
     def __init__(self):
         """ Initialise the class and call the cooperative superclass
