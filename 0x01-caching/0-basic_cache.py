@@ -6,12 +6,6 @@ from base_cache import BaseCaching
 class BasicCache(BaseCaching):
     """ A caching system that inherits from BaseCaching
     """
-    def __init__(self):
-        """ Initialise the class and call the cooperative superclass
-            method.
-        """
-        super().__init__()
-
     def put(self, key, item):
         """ Add an item in the cache
         """
