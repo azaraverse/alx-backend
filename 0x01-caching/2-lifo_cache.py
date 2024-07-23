@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """LIFO Caching module"""
-BaseCaching = __import__('0-basic_cache').BaseCaching
+from base_cache import BaseCaching
 
 
 class LIFOCache(BaseCaching):
