@@ -10,7 +10,7 @@ class BaseCaching():
     MAX_ITEMS = 4
 
     def __init__(self):
-        """ Initiliaze
+        """ Initiliaze the class
         """
         self.cache_data = {}
 
@@ -20,6 +20,16 @@ class BaseCaching():
         print("Current cache:")
         for key in sorted(self.cache_data.keys()):
             print("{}: {}".format(key, self.cache_data.get(key)))
+
+
+class BasicCache(BaseCaching):
+    """ A caching system that inherits from BaseCaching
+    """
+    def __init__(self):
+        """ Initialise the class and call the cooperative superclass
+            method.
+        """
+        super().__init__()
 
     def put(self, key, item):
         """ Add an item in the cache
@@ -35,13 +45,3 @@ class BaseCaching():
         if key is None or key not in self.cache_data:
             return None
         return self.cache_data.get(key)
-
-
-class BasicCache(BaseCaching):
-    """ A caching system that inherits from BaseCaching
-    """
-    def __init__(self):
-        """ Initialise the class and call the cooperative superclass
-            method.
-        """
-        super().__init__()
