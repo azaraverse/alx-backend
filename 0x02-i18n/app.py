@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Basic Flask App"""
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, format_datetime
 import pytz
 
 
@@ -22,7 +22,8 @@ app.config.from_object(Config)
 def index():
     """ Index route that returns content of the index page
     """
-    return render_template("7-index.html")
+    g.time = format_datetime()
+    return render_template("index.html")
 
 
 @babel.localeselector
