@@ -8,3 +8,4 @@ package-lock.json
 *.tar.gz
 redis-7.4.0/
 node_modules/
+.eslintrc.js
