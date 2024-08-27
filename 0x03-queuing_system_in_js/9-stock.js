@@ -50,7 +50,7 @@ function reserveStockById(itemId, stock) {
 async function getCurrentReservedStockById(itemId) {
   try {
     const value = await getAsync(`item.${itemId}`);
-    return value;
+    return value || 0;
   } catch (err) {
     console.error(err);
   }
@@ -60,17 +60,43 @@ app.get('/list_products/:itemId(\\d+)', async (request, response) => {
   const { itemId } = request.params;
   const item = getItemById(parseInt(itemId));
   if (!item) {
-    return response.json({ "status": "Product not found" });
+    return response.json({ "status": "Product not found" }).status(404);
   }
+
   const reservedStock = await getCurrentReservedStockById(parseInt(itemId));
   const res = {
     itemId: item.itemId,
     itemName: item.itemName,
     price: item.price,
     initialAvailableQuantity: item.initialAvailableQuantity,
-    currentQuantity: reservedStock || item.initialAvailableQuantity
+    currentQuantity: parseInt(reservedStock) || item.initialAvailableQuantity
   };
   response.json(res);
+});
+
+app.get('/reserve_product/:itemId(\\d+)', async (request, response) => {
+  const { itemId } = request.params;
+  const convertedItemId = parseInt(itemId);
+  const item = getItemById(convertedItemId);
+  if (!item) {
+    return response.json({ "status": "Product not found" }).status(404);
+  }
+
+  let currentStock = await getCurrentReservedStockById(convertedItemId);
+  if (currentStock === null) {
+    currentStock = item.initialAvailableQuantity;
+  } else {
+    currentStock = parseInt(currentStock);
+  }
+
+  if (currentStock <= 0) {
+    return response.json({ "status": "Not enough stock available", "itemId": convertedItemId });
+  }
+
+  const newStock = currentStock - 1;
+
+  reserveStockById(convertedItemId, newStock);
+  return response.json({ "status": "Reservation confirmed", "itemId": convertedItemId });
 });
 
 app.listen(port);
